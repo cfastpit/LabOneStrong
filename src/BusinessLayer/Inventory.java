@@ -1,14 +1,14 @@
 package BusinessLayer;
 
 
-public class Product {
+public class Inventory {
  
   private String productID;
   private String description;
   private int quantityOnHand;
   private double price;
     
-    public Product(String productID, String description, int quantityOnHand, double price) {
+    public Inventory(String productID, String description, int quantityOnHand, double price) {
         this.productID = productID;
         this.description = description;
         this.quantityOnHand = quantityOnHand;

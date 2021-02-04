@@ -9,7 +9,7 @@ public class OrderSystem {
     public static void main(String[] args) {
     
           CustomerDataManager customerDm = new CustomerDataManager();
-        ProductDataManager productDm = new ProductDataManager();
+        InventoryDataManager productDm = new InventoryDataManager();
         OrderDataManager orderDM = new OrderDataManager();
         OrderItemDataManager orderItemDm = new OrderItemDataManager();
 
@@ -17,9 +17,9 @@ public class OrderSystem {
         Customer customer2 = new Customer(200, "Mark", "Jones ", "555-254-5440");
         Customer customer3 = new Customer(300, "Jhon", "Doe", "555-215-5699");
 
-        Product product1 = new Product("1", "soap", 5, 12.44);
-        Product product2 = new Product("2", "Icecream", 5, 2.44);
-        Product product3 = new Product("3", "Gum", 5, 1.44);
+        Inventory product1 = new Inventory("1", "soap", 5, 12.44);
+        Inventory product2 = new Inventory("2", "Icecream", 5, 2.44);
+        Inventory product3 = new Inventory("3", "Gum", 5, 1.44);
 
         Order order1 = new Order("10", "100", "5/5/2020");
         Order order2 = new Order("20", "200", "5/5/2020");
@@ -58,8 +58,8 @@ public class OrderSystem {
             System.err.println(dbCustomer);
         }
         
-         ArrayList<Product> productFromDatabase = productDm.getAll();
-        for (Product dbpProduct : productFromDatabase) {
+         ArrayList<Inventory> productFromDatabase = productDm.getAll();
+        for (Inventory dbpProduct : productFromDatabase) {
             System.err.println(dbpProduct);
         }
          ArrayList<Order> orderFromDatabase = orderDM.getAll();
