@@ -1,53 +1,85 @@
-
 package BusinessLayer;
-
+import java.util.Date;
+import java.util.ArrayList;
+import DataAccess.OrderDataManager;
 
 public class Order {
-    private String orderNumber;
-    private String customerID;
-    private String date;
+  private int customerID;
+    private ArrayList<OrderItem> orderItems = new ArrayList<OrderItem> (5);
+    private Date orderDate;
+    private int orderNumber;
     
-    public Order(String orderNumber, String customerID, String date) {
-        this.orderNumber = orderNumber;
-        this.customerID = customerID;
-        this.date = date;
-        
-     //get and sets
-     
-     
-        
-        
+        public void add() {
+        OrderDataManager.add(this);
     }
-
-    public String getOrderNumber() {
-        return orderNumber;
+    
+    public void addItem(OrderItem item) {
+        System.out.println("Inside Order.addItem\n  " + item);
+        orderItems.add(item);
+        item.setLineNumber(orderItems.size());
     }
-
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+    
+    public static Order createOrder(Customer c){
+        Order order = new Order();
+        order.setCustomerID(c.getCustomerID());
+        order.setOrderDate(new Date());
+        return order;
     }
+    
+    public static ArrayList<Order> findCustomerOrders(int customerID){
+        return OrderDataManager.findCustomerOrders(customerID);
+    }
+    
+    public static Order get(int i) {
+        return OrderDataManager.get(i);
+    }
+    
+    
+    
+    
+    
+    //gets and sets
 
-    public String getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 
-    public String getDate() {
-        return date;
+    public ArrayList<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setOrderItems(ArrayList<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" + "orderNumber = " + orderNumber + ", customerID = " + customerID + ", date = " + date + '}';
+    public Date getOrderDate() {
+        return orderDate;
     }
-    
-    
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+     public String toString() {
+        String returnString;
+        returnString = orderNumber + "   " + orderDate.toString() + " Customer: " + customerID;
+        for(int i = 0; i < orderItems.size(); i++) {
+            returnString = returnString + "\n     " + orderItems.get(i);
+        }
+        
+        return returnString;
+    }
     
 }

@@ -1,29 +1,40 @@
 package BusinessLayer;
-
-
+import DataAccess.InventoryDataManager;
+import java.util.ArrayList;
 public class Inventory {
  
-  private String productID;
-  private String description;
-  private int quantityOnHand;
-  private double price;
+    String description;
+    private double price;
+    private int productId;
+    private int quantityOnHand;
     
-    public Inventory(String productID, String description, int quantityOnHand, double price) {
-        this.productID = productID;
-        this.description = description;
-        this.quantityOnHand = quantityOnHand;
-        this.price = price;
+    
+    public void add() {
+        InventoryDataManager.add(this);
+    }
+    
+    public static Inventory find(int id) {
+        return InventoryDataManager.find(id);
     }
 
-    //Gets and Sets
+    
+    public static Inventory get(int i){
+        return InventoryDataManager.get(i);
+    }
+    
 
-    public String getProductID() {
-        return productID;
+    
+    public static void initialize(){
+        InventoryDataManager.initialize();
     }
 
-    public void setProductID(String productID) {
-        this.productID = productID;
+    
+    
+    
+    public static int getNumberOfInventory(){
+        return InventoryDataManager.getNumberOfInventory();
     }
+    //get and sets
 
     public String getDescription() {
         return description;
@@ -31,14 +42,6 @@ public class Inventory {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getQuantityOnHand() {
-        return quantityOnHand;
-    }
-
-    public void setQuantityOnHand(int quantityOnHand) {
-        this.quantityOnHand = quantityOnHand;
     }
 
     public double getPrice() {
@@ -49,10 +52,26 @@ public class Inventory {
         this.price = price;
     }
 
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public int getQuantityOnHand() {
+        return quantityOnHand;
+    }
+
+    public void setQuantityOnHand(int quantityOnHand) {
+        this.quantityOnHand = quantityOnHand;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "productID = " + productID + ", description = " + description + ", quantityOnHand = " + quantityOnHand + ", price = " + price + '}';
+        return "Inventory{" + "description=" + description + ", price=" + price + ", productId=" + productId + ", quantityOnHand=" + quantityOnHand + '}';
     }
     
-    
+  
 }

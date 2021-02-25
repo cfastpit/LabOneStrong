@@ -1,81 +1,59 @@
 import java.util.Arrays;
 import BusinessLayer.*;
-import DataAccess.*;
+
 import java.util.ArrayList;
 
 public class OrderSystem {
 
    
     public static void main(String[] args) {
-    
-          CustomerDataManager customerDm = new CustomerDataManager();
-        InventoryDataManager productDm = new InventoryDataManager();
-        OrderDataManager orderDM = new OrderDataManager();
-        OrderItemDataManager orderItemDm = new OrderItemDataManager();
-
-        Customer customer1 = new Customer(100, "Bob", "Smith", "555-432-5490");
-        Customer customer2 = new Customer(200, "Mark", "Jones ", "555-254-5440");
-        Customer customer3 = new Customer(300, "Jhon", "Doe", "555-215-5699");
-
-        Inventory product1 = new Inventory("1", "soap", 5, 12.44);
-        Inventory product2 = new Inventory("2", "Icecream", 5, 2.44);
-        Inventory product3 = new Inventory("3", "Gum", 5, 1.44);
-
-        Order order1 = new Order("10", "100", "5/5/2020");
-        Order order2 = new Order("20", "200", "5/5/2020");
-        Order order3 = new Order("30", "300", "5/5/2020");
-
-        OrderItem orderItem1 = new OrderItem("10", "1", "2", "Icecream", 1, 2.44);
-        OrderItem orderItem2 = new OrderItem("10", "2", "1", "soap", 1, 2.44);
-        OrderItem orderItem3 = new OrderItem("20", "3", "1", "soap", 2, 24.88);
-        OrderItem orderItem4 = new OrderItem("20", "4", "2", "Icecream", 2, 4.88);
-        OrderItem orderItem5 = new OrderItem("30", "5", "3", "Gum", 2, 2.88);
-        OrderItem orderItem6 = new OrderItem("30", "6", "2", "Icecream", 1, 2.44);
-
-        //create
-        customerDm.create(customer1);
-        customerDm.create(customer2);
-        customerDm.create(customer3);
-
-        productDm.create(product1);
-        productDm.create(product2);
-        productDm.create(product3);
-
-        orderItemDm.create(orderItem1);
-        orderItemDm.create(orderItem2);
-        orderItemDm.create(orderItem3);
-        orderItemDm.create(orderItem4);
-        orderItemDm.create(orderItem5);
-        orderItemDm.create(orderItem6);
-
-        orderDM.create(order1);
-        orderDM.create(order2);
-        orderDM.create(order3);
-
-        //arraylist for business Layer
-        ArrayList<Customer> customersFromDatabase = customerDm.getAll();
-        for (Customer dbCustomer : customersFromDatabase) {
-            System.err.println(dbCustomer);
+  int i,n;
+        Customer customer;
+        Order order;
+        OrderItem item;
+        ArrayList<Order> orders;
+        
+        Customer.initialize(); 
+        Inventory.initialize();
+        
+        customer = Customer.find(100);
+        order = Order.createOrder(customer);
+        item = OrderItem.createOrderItem(Inventory.find(100));
+        item.setQuantity(2);
+        order.addItem(item);
+        order.add();
+        
+        customer = Customer.find(200);
+        order = Order.createOrder(customer);
+        item = OrderItem.createOrderItem(Inventory.find(200));
+        item.setQuantity(3);
+        order.addItem(item);
+        item = OrderItem.createOrderItem(Inventory.find(300));
+        item.setQuantity(4);
+        order.addItem(item);
+        order.add();
+        
+        customer = Customer.find(300);
+        order = Order.createOrder(customer);
+        item = OrderItem.createOrderItem(Inventory.find(100));
+        item.setQuantity(1);
+        order.addItem(item);
+        item = OrderItem.createOrderItem(Inventory.find(300));
+        item.setQuantity(2);
+        order.addItem(item);
+        order.add();
+        
+        for (i = 0; i < Inventory.getNumberOfInventory(); i++){
+            System.out.println(Inventory.get(i));
         }
         
-         ArrayList<Inventory> productFromDatabase = productDm.getAll();
-        for (Inventory dbpProduct : productFromDatabase) {
-            System.err.println(dbpProduct);
+        for(i = 0; i < Customer.getNumberOfCustomers(); i++){
+            customer = Customer.get(i);
+            System.out.println(customer);
+            orders = Order.findCustomerOrders(customer.getCustomerID());
+            for (n = 0; n < orders.size(); n++){
+                System.out.println(orders.get(n));
+            }
         }
-         ArrayList<Order> orderFromDatabase = orderDM.getAll();
-        for (Order dbOrder : orderFromDatabase) {
-            System.err.println(dbOrder);
-        }
-        
-         ArrayList<OrderItem> orderItemFromDatabase = orderItemDm.getAll();
-        for (OrderItem dbOrderItem : orderItemFromDatabase) {
-            System.err.println(dbOrderItem);
-        }
-        
-        
-        /*
-        
-        */
     }
-    
 }

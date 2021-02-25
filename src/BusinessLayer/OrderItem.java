@@ -1,57 +1,42 @@
 package BusinessLayer;
-
+import DataAccess.OrderItemDataManager;
 
 public class OrderItem {
-    private String orderNumber;
-   private String lineNumber;
-   private String   productID;
-   private String productDescription;
-   private int quantity;
-   private double Price;
-   
-   
-   
-   public OrderItem(String orderNumber, String lineNumber, String productID, String productDescription, int quantity, double Price) {
-        this.orderNumber = orderNumber;
-        this.lineNumber = lineNumber;
-        this.productID = productID;
-        this.productDescription = productDescription;
-        this.quantity = quantity;
-        this.Price = Price;
-        
-        
+private String description;
+    private int lineNumber;
+    private int quantity;
+    private double price;
+    private int productID;
+    
+      public void add() {
+        OrderItemDataManager.add(this);
+    }
+    
+    public static OrderItem createOrderItem(Inventory inv){
+        OrderItem item = new OrderItem();
+        item.setProductID(inv.getProductId());
+        item.setDescription(inv.getDescription());
+        item.setPrice(inv.getPrice());
+        return item;
+    }
+    
+    
+    //get and sets
+
+    public String getDescription() {
+        return description;
     }
 
-    public String getOrderNumber() {
-        return orderNumber;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public String getLineNumber() {
+    public int getLineNumber() {
         return lineNumber;
     }
 
-    public void setLineNumber(String lineNumber) {
+    public void setLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
-    }
-
-    public String getProductID() {
-        return productID;
-    }
-
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
-
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
     }
 
     public int getQuantity() {
@@ -63,18 +48,25 @@ public class OrderItem {
     }
 
     public double getPrice() {
-        return Price;
+        return price;
     }
 
-    public void setPrice(double Price) {
-        this.Price = Price;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     @Override
     public String toString() {
-        return "OrderItem{" + "orderNumber = " + orderNumber + ", lineNumber = " + lineNumber + ", productID = " + productID + ", productDescription = " + productDescription + ", quantity = " + quantity + ", Price = " + Price + '}';
+        return "OrderItem{" + "description=" + description + ", lineNumber=" + lineNumber + ", quantity=" + quantity + ", price=" + price + ", productID=" + productID + '}';
     }
-   
     
     
 }

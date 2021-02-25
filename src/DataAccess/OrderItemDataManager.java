@@ -5,18 +5,9 @@ import java.util.ArrayList;
 
 public class OrderItemDataManager {
  
-   private ArrayList<OrderItem> dataStore;
-
-    public OrderItemDataManager() {
-        this.dataStore = new ArrayList<OrderItem>();
-    }
-
-    public ArrayList<OrderItem> getAll() {
-        return dataStore;
-    }
-public void create(OrderItem orderItemToCreate) {
-     
-        this.dataStore.add(orderItemToCreate);
-    } 
+private static ArrayList<OrderItem> items = new ArrayList<OrderItem>(5);
     
+    public static void add(OrderItem item) {
+        items.add(item);
+    }
 }

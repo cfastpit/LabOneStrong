@@ -1,21 +1,32 @@
-
 package BusinessLayer;
-
+import DataAccess.CustomerDataManager;
 
 public class Customer {
-     private int customerID;
+    private int customerID;
     private String firstName;
     private String lastName;
     private String phoneNumber;
 
-    public Customer(int customerID, String firstName, String lastName, String phoneNumber) {
-        this.customerID = customerID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
+    //add
+   public void add(){
+       CustomerDataManager.add(this);
+   }
+   //find
+   public static Customer find(int id){
+        return CustomerDataManager.find(id);
+    }
+    //return the data
+    public static Customer get(int i) {
+        return CustomerDataManager.get(i);
+    }
+    //create
+    public static void initialize(){
+        CustomerDataManager.initialize();
     }
 
-
+public static int getNumberOfCustomers() {
+        return CustomerDataManager.getNumberOfCustomers();
+    }
 //get and sets
 
     public int getCustomerID() {

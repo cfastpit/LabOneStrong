@@ -5,17 +5,28 @@ import java.util.ArrayList;
 
 public class OrderDataManager {
  
-    private ArrayList<Order> dataStore;
-
-    public OrderDataManager() {
-        this.dataStore = new ArrayList<Order>();
+   private static ArrayList<Order> orders = new ArrayList<Order>(5);
+   private static ArrayList<Order> customerOrders = new ArrayList<Order>(5);
+    
+    public static void add(Order o) {
+        o.setOrderNumber(orders.size()+1);
+        orders.add(o);
     }
-
-    public ArrayList<Order> getAll() {
-        return dataStore;
+    
+    public static ArrayList<Order> findCustomerOrders(int customerID){
+        customerOrders.clear();
+        for (int i = 0; i < orders.size(); i++){
+            if (customerID == orders.get(i).getCustomerID())
+                customerOrders.add(orders.get(i));
+        }
+        return customerOrders;
     }
-public void create(Order orderToCreate) {
-       
-        this.dataStore.add(orderToCreate);
+    
+    public static Order get(int i) {
+        return orders.get(i);
+    }
+    
+    public static int getNumberOfOrders() {
+        return orders.size();
     }
 }
